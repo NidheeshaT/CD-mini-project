@@ -5,32 +5,28 @@
     extern FILE *yyin;
 %}
 
-%token ID NUM NL BEGIN_ END MAIN INT FLOAT SC CM BLANK EQ LE EXPR FOR
+%token ID NUM NL BEGIN_ END MAIN INT FLOAT SC CM EQ LE EXPR FOR
 %%
 stmt:s {printf("\nValid language\n");exit(0);}
 ;
-s:INT BLANK MAIN '(' ')' NL BEGIN_ NL f END
+s:INT MAIN '(' ')' NL BEGIN_ NL f END
 ;
 f:declare NL loop
 ;
-declare: b type list SC
+declare: type list SC
 ;
 type:INT|FLOAT
 ;
-list:list CM b ID b
-|list CM b ID b EQ b id_num b
-|b ID b EQ b id_num b
-|b ID b
+list:list CM ID
+|list CM ID EQ id_num
+|ID EQ id_num
+|ID
 ;
-loop: b FOR '(' ID EQ id_num b SC b ID b LE b id_num b SC b increment ')' NL b BEGIN_ NL b expr NL b END NL
-;
-b:b BLANK | 
+loop: FOR '(' ID EQ id_num SC ID LE id_num SC '+' '+' ID ')' NL BEGIN_ NL expr NL END NL
 ;
 id_num:ID|NUM
 ;
-increment: '+' '+' ID | ID '+' '+'
-;
-expr: EXPR b EQ b EXPR b '+' b EXPR b SC
+expr: EXPR EQ EXPR '+' EXPR SC
 ;
 %%
 

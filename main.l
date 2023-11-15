@@ -4,8 +4,8 @@
 %}
 
 %%
-"int" {return INT;}
-"float" {return FLOAT;}
+"int " {return INT;}
+"float " {return FLOAT;}
 "begin" {return BEGIN_;}
 "end" {return END;}
 "main" {return MAIN;}
@@ -15,7 +15,7 @@
 [0-9]+ {return NUM;}
 \r\n {return NL;}
 "    " {;}
-[ \t]+ {return BLANK;}
+[ \t]+ {;}
 "<=" {return LE;}
 "=" {return EQ;}
 ";" {return SC;}
